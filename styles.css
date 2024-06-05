@@ -35,6 +35,15 @@ section {
     max-width: 800px;
 }
 
+section#inicio {
+    background-color: #F5F5F5;
+    text-align: center;
+}
+
+section#partidos {
+    background-color: #F9F9F9;
+}
+
 footer {
     background: #000000;
     color: #FFFFFF;
@@ -43,4 +52,37 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
+}
+
+h2 {
+    color: #FF6347;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #FFA07A;
+    color: white;
+}
+
+.rating-button {
+    background-color: #FF6347;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.rating-button:hover {
+    background-color: #FF4500;
 }
