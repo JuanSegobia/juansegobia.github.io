@@ -1,74 +1,388 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juan Cruz Segobia</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juan Cruz Segobia Esteves</title>
+<meta name="description" content="Estudiante de Analista Programador Universitario y Ciencia de Datos en Organizaciones (UNLP). Desarrollo web con Python y análisis de datos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F7F6;
+    --surface: #FFFFFF;
+    --ink: #17201C;
+    --muted: #55625C;
+    --line: #D9E0DC;
+    --tilo: #2F6B47;
+    --tilo-soft: #E2EDE5;
+    --grid: rgba(47, 107, 71, 0.13);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121815;
+      --surface: #19211D;
+      --ink: #E9EFEB;
+      --muted: #A1AFA8;
+      --line: #2C3832;
+      --tilo: #7FC199;
+      --tilo-soft: #1F3328;
+      --grid: rgba(127, 193, 153, 0.12);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121815; --surface: #19211D; --ink: #E9EFEB; --muted: #A1AFA8;
+    --line: #2C3832; --tilo: #7FC199; --tilo-soft: #1F3328; --grid: rgba(127,193,153,.12);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Schibsted Grotesk", system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--tilo); text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--tilo); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+  @media (max-width: 600px) { .wrap { padding: 0 16px; } }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+  nav .brand { font-weight: 700; color: var(--ink); text-decoration: none; white-space: nowrap; }
+  nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; font-size: .95rem; }
+  nav ul a { color: var(--muted); text-decoration: none; }
+  nav ul a:hover { color: var(--ink); }
+  @media (max-width: 640px) { nav ul { display: none; } }
+
+  /* Hero: La Plata's grid-and-diagonals plan as the backdrop */
+  header.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .plano { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--grid); pointer-events: none; }
+  .hero .wrap { position: relative; padding-top: 96px; padding-bottom: 88px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
+  @media (max-width: 720px) { .hero-grid { grid-template-columns: 1fr; } .hero .wrap { padding-top: 64px; padding-bottom: 56px; } }
+  h1 {
+    font-size: clamp(2.6rem, 7vw, 4.75rem);
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    font-weight: 800;
+    margin: 0 0 24px;
+  }
+  .hero p.lead { font-size: 1.25rem; max-width: 34em; color: var(--muted); margin: 0 0 32px; }
+  .hero p.lead strong { color: var(--ink); font-weight: 600; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 18px; border-radius: 999px;
+    font-weight: 600; font-size: .98rem; text-decoration: none;
+    border: 1.5px solid var(--tilo); color: var(--tilo); background: var(--surface);
+  }
+  .btn.primary { background: var(--tilo); color: var(--bg); }
+  .btn:hover { text-decoration: none; filter: brightness(1.06); }
+  .btn svg { width: 18px; height: 18px; }
+
+  .foto {
+    width: 168px; height: 168px; border-radius: 50%;
+    background: var(--tilo-soft); border: 1.5px solid var(--line);
+    display: grid; place-items: center; overflow: hidden;
+    font-size: 3rem; font-weight: 800; color: var(--tilo); letter-spacing: -0.04em;
+  }
+  .foto img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 720px) { .foto { width: 112px; height: 112px; font-size: 2rem; order: -1; } }
+
+  /* Sections */
+  section { padding: 80px 0; border-bottom: 1px solid var(--line); }
+  @media (max-width: 600px) { section { padding: 56px 0; } }
+  h2 { font-size: 2rem; letter-spacing: -0.025em; line-height: 1.15; margin: 0 0 32px; font-weight: 750; }
+  h3 { font-size: 1.35rem; letter-spacing: -0.015em; line-height: 1.25; margin: 0; font-weight: 700; }
+  .prose { max-width: 40em; }
+  .prose p { margin: 0 0 1em; }
+
+  /* Projects */
+  .proyectos { display: grid; gap: 28px; }
+  .proyecto {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 32px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 32px;
+  }
+  .proyecto.destacado { border-left: 5px solid var(--tilo); }
+  @media (max-width: 760px) { .proyecto { grid-template-columns: 1fr; padding: 24px; gap: 20px; } }
+  .proyecto .contexto { color: var(--muted); font-size: .95rem; margin: 6px 0 14px; }
+  .proyecto p { margin: 0 0 14px; }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0 0 16px; }
+  .stack li { font-size: .85rem; font-weight: 500; padding: 3px 10px; border-radius: 999px; background: var(--tilo-soft); color: var(--tilo); }
+  .mi-parte h4 { margin: 0 0 8px; font-size: 1rem; }
+  .mi-parte ul { margin: 0; padding-left: 1.1em; color: var(--muted); }
+  .mi-parte li { margin-bottom: 4px; }
+  .mi-parte li::marker { color: var(--tilo); }
+  .links { display: flex; flex-wrap: wrap; gap: 16px; font-weight: 600; font-size: .95rem; }
+  .estado { font-size: .9rem; color: var(--muted); }
+
+  /* Formación & experiencia */
+  .dos-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  @media (max-width: 760px) { .dos-col { grid-template-columns: 1fr; gap: 40px; } }
+  .item { padding: 0 0 24px 20px; border-left: 2px solid var(--line); position: relative; }
+  .item::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--tilo); }
+  .item:last-child { padding-bottom: 0; }
+  .item .cuando { color: var(--muted); font-size: .95rem; margin: 2px 0 8px; }
+  .item p { margin: 0; }
+  .item h3 { font-size: 1.15rem; }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 32px; }
+  .skills h3 { font-size: 1.05rem; margin-bottom: 10px; }
+  .skills ul { list-style: none; padding: 0; margin: 0; }
+  .skills li { padding: 6px 0; border-bottom: 1px solid var(--line); }
+
+  /* Contact */
+  .contacto h2 { font-size: clamp(2rem, 5vw, 3rem); max-width: 16em; }
+  .contacto dl { display: grid; grid-template-columns: max-content 1fr; gap: 10px 24px; margin: 0 0 32px; }
+  .contacto dt { color: var(--muted); }
+  .contacto dd { margin: 0; font-weight: 600; word-break: break-word; }
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: .9rem; }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Juan Cruz Segobia</h1>
-        <nav>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#sobre-mi">Sobre Mí</a></li>
-                <li><a href="#proyectos">Proyectos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-                <li><a href="#partidos">Partidos</a></li>
+
+<nav aria-label="Principal">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Juan Cruz Segobia</a>
+    <ul>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#formacion">Formación</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="inicio">
+  <!-- Plano de La Plata: cuadrícula con diagonales y plazas -->
+  <svg class="plano" aria-hidden="true" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 600">
+    <defs>
+      <pattern id="manzanas" width="50" height="50" patternUnits="userSpaceOnUse">
+        <path d="M50 0H0V50" fill="none" stroke="currentColor" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="1200" height="600" fill="url(#manzanas)"/>
+    <g fill="none" stroke="currentColor" stroke-width="3">
+      <path d="M300 -300L1200 600"/>
+      <path d="M1500 -300L600 600"/>
+      <path d="M0 300H1200" stroke-width="4"/>
+      <path d="M900 0V600" stroke-width="4"/>
+    </g>
+    <g fill="currentColor">
+      <rect x="875" y="275" width="50" height="50"/>
+      <rect x="1125" y="25" width="50" height="50" opacity=".6"/>
+      <rect x="875" y="525" width="50" height="50" opacity=".6"/>
+    </g>
+  </svg>
+
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1>Juan Cruz<br>Segobia Esteves</h1>
+        <p class="lead">Estudiante de <strong>Analista Programador Universitario</strong> y de <strong>Ciencia de Datos en Organizaciones</strong> en la UNLP. Desarrollo aplicaciones web con Python y trabajo con datos, desde la base hasta el gráfico. Busco mi primera pasantía en datos o sistemas.</p>
+        <div class="actions">
+          <a class="btn primary" href="mailto:juansegobia2002@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            Escribirme
+          </a>
+          <a class="btn" href="https://github.com/JuanSegobia">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+            GitHub
+          </a>
+          <!-- Cuando tengas el CV en PDF, subilo al repo como cv.pdf y descomentá esto:
+          <a class="btn" href="cv.pdf" download>Descargar CV</a>
+          -->
+        </div>
+      </div>
+      <!-- Para la foto: subí foto.jpg al repo y reemplazá "JS" por <img src="foto.jpg" alt="Juan Cruz Segobia"> -->
+      <div class="foto" aria-hidden="true">JS</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="sobre-mi">
+    <div class="wrap">
+      <h2>Sobre mí</h2>
+      <div class="prose">
+        <p>Estoy terminando el último año de Analista Programador Universitario en la Facultad de Informática de la UNLP (egreso previsto en 2027) y cursando el segundo año de Ciencia de Datos en Organizaciones, una carrera compartida entre Informática y Ciencias Económicas. Esa combinación me interesa: entender cómo funciona un sistema por dentro y qué decisiones de negocio se pueden tomar con los datos que genera.</p>
+        <p>En la facultad trabajo casi siempre en equipos de cuatro o cinco personas, con Git, ramas por funcionalidad y revisiones antes de integrar. Fuera de lo académico colaboro desde hace años en Miwok, una empresa familiar, en la detección y mejora de procesos y la coordinación de personas.</p>
+        <p>Jugué al fútbol en las inferiores de Estudiantes de La Plata hasta llegar a la reserva, y estuve convocado a la selección Sub-15. De ahí me quedó la costumbre de entrenar todos los días y de pensar en el equipo antes que en mí.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="wrap">
+      <h2>Proyectos</h2>
+      <div class="proyectos">
+
+        <article class="proyecto destacado">
+          <div>
+            <h3>Sistema de gestión de viandas hospitalarias</h3>
+            <p class="contexto">Proyecto de Software, UNLP · 2026 · equipo de 5 · en desarrollo</p>
+            <p>Sistema web para un hospital de niños que organiza las viandas del personal: solicitudes por sector, cupos, autorizaciones, entregas y resúmenes. Tiene un panel de administración y una API REST que consumen otras aplicaciones.</p>
+            <ul class="stack">
+              <li>Python</li><li>Flask</li><li>Jinja</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>API REST + JWT</li><li>pytest</li><li>Docker</li>
             </ul>
-        </nav>
-    </header>
-    <section id="inicio">
-        <h2>Bienvenido a mi página personal</h2>
-        <p>Jugador de fútbol y estudiante de informática en la UNLP.</p>
-    </section>
-    <section id="sobre-mi">
-        <h2>Sobre Mí</h2>
-        <p>Mi nombre es Juan Cruz Segobia, tengo 22 años y soy estudiante de licenciatura en informática en la UNLP. Jugue al fútbol en Estudiantes de La Plata desde los 10 años hasta los 19 llegando a la reserva y habiendo entrenado con el plantel profesional repetidas veces y a su vez entrenado en la sub 15 de Argentina. Actualmente estoy jugando en la primera división de ADIP, equipo de la liga amateur platense. Inicié mis estudios en 2020 en la carrera de administración de empresas y posteriormente inicié con esta carrera. En la cual me encuentro en segundo año.</p>
-    </section>
-    <section id="proyectos">
-        <h2>Proyectos</h2>
-        <p>Tengo un resumen por partido jugado en ADIP, en el cual tengo un video para mostrar, y estadísticas de los partidos que se van actualizando semana a semana. Me gustaría agregar una especie de interacción con el usuario, ya sea con valoraciones por partido.</p>
-    </section>
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <p>Email: <a href="mailto:juansegobia2002@gmail.com">juansegobia2002@gmail.com</a></p>
-        <p>Instagram: <a href="https://www.instagram.com/juansegobiaa/" target="_blank">juansegobiaa</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/juan-segobia-b400521b7/" target="_blank">Juan Segobia</a></p>
-    </section>
-    <section id="partidos">
-        <h2>Partidos</h2>
-        <p>Aquí podrás encontrar el registro de todos los partidos que he jugado, junto con estadísticas y valoraciones.</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Equipo</th>
-                    <th>Resultado</th>
-                    <th>Minutos Jugados</th>
-                    <th>Goles</th>
-                    <th>Valoración</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>05/06/2024</td>
-                    <td>Equipo A</td>
-                    <td>2-1</td>
-                    <td>90</td>
-                    <td>1</td>
-                    <td>
-                        <button class="rating-button">Valorar</button>
-                    </td>
-                </tr>
-                <!-- Más partidos se pueden añadir aquí -->
-            </tbody>
-        </table>
-    </section>
-    
-    <footer>
-        <p>&copy; 2024 Juan Cruz Segobia</p>
-    </footer>
+            <p class="estado">El código está en el GitLab de la cátedra, por eso no tiene enlace público.</p>
+          </div>
+          <div class="mi-parte">
+            <h4>Lo que hice</h4>
+            <ul>
+              <li>Layout base de la aplicación y pantalla de inicio.</li>
+              <li>Módulo de gestión de sectores, que se desactivan en lugar de borrarse cuando tienen registros asociados.</li>
+              <li>Módulo de tipos de menú.</li>
+              <li>Reglas del flujo de pedidos y permisos sobre los cupos.</li>
+              <li>Vista de listado de usuarios.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="proyecto">
+          <div>
+            <h3>Kuda: gestión de un gimnasio</h3>
+            <p class="contexto">Ingeniería de Software, UNLP · 2026 · trabajo en equipo</p>
+            <p>Aplicación web para un gimnasio, construida a partir de los requerimientos de un cliente: clases y reservas con lista de espera, pagos de cuotas con Mercado Pago, control de asistencia con código QR y reportes para la administración.</p>
+            <ul class="stack">
+              <li>Angular</li><li>TypeScript</li><li>Node.js</li><li>Express</li><li>PostgreSQL</li><li>Mercado Pago</li>
+            </ul>
+            <div class="links">
+              <a href="https://github.com/EnzoBattista/Kuda-front">Frontend en GitHub</a>
+              <a href="https://github.com/EnzoBattista/Kuda-back">Backend en GitHub</a>
+            </div>
+          </div>
+          <div class="mi-parte">
+            <h4>Lo que hice</h4>
+            <ul>
+              <li>Página de bienvenida, inicio de sesión y registro.</li>
+              <li>Recuperación de contraseña y edición de perfil.</li>
+              <li>Vistas del panel de administración y tabla de usuarios.</li>
+              <li>Pantallas de gestión de reservas y de clases.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="proyecto">
+          <div>
+            <h3>PyTrivia: juego de preguntas sobre datos abiertos</h3>
+            <p class="contexto">Seminario de Lenguajes: Python, UNLP · 2024 · equipo de 4</p>
+            <p>Juego de preguntas armado sobre datasets públicos. Primero se limpian y transforman los datos con pandas y se analizan en un notebook; después una aplicación en Streamlit genera preguntas a partir de ellos, guarda usuarios y muestra un ranking y estadísticas con gráficos.</p>
+            <ul class="stack">
+              <li>Python</li><li>pandas</li><li>Jupyter</li><li>Streamlit</li><li>Visualización</li>
+            </ul>
+            <div class="links">
+              <a href="https://github.com/JuanSegobia/Seminario-Python">Código en GitHub</a>
+            </div>
+          </div>
+          <div class="mi-parte">
+            <h4>Qué incluye</h4>
+            <ul>
+              <li>Procesamiento y limpieza de varios datasets.</li>
+              <li>Informe en Jupyter que responde 12 consignas de análisis.</li>
+              <li>Página de exploración de datos con gráficos.</li>
+              <li>Registro de usuarios, ranking y estadísticas históricas.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="formacion">
+    <div class="wrap dos-col">
+      <div>
+        <h2>Formación</h2>
+        <div class="item">
+          <h3>Analista Programador Universitario</h3>
+          <p class="cuando">Facultad de Informática, UNLP · cursando 3.er y último año · egreso previsto 2027</p>
+        </div>
+        <div class="item">
+          <h3>Ciencia de Datos en Organizaciones</h3>
+          <p class="cuando">Facultades de Informática y de Ciencias Económicas, UNLP · cursando 2.º de 4 años</p>
+        </div>
+        <div class="item">
+          <h3>Cursos de Grupo SET LATAM</h3>
+          <p class="cuando">Formación complementaria</p>
+        </div>
+      </div>
+      <div>
+        <h2>Experiencia</h2>
+        <div class="item">
+          <h3>Miwok</h3>
+          <p class="cuando">Empresa familiar · colaboración continua</p>
+          <p>Detección y mejora de procesos internos, organización de tareas y coordinación de equipos de trabajo.</p>
+        </div>
+        <div class="item">
+          <h3>Proyectos freelance</h3>
+          <p class="cuando">Trabajos independientes</p>
+          <p>Desarrollos a pedido para clientes particulares.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="habilidades">
+    <div class="wrap">
+      <h2>Habilidades</h2>
+      <div class="skills">
+        <div>
+          <h3>Lenguajes y frameworks</h3>
+          <ul><li>Python</li><li>Flask y Jinja</li><li>pandas, Jupyter, Streamlit</li><li>HTML y CSS</li><li>Angular y TypeScript</li></ul>
+        </div>
+        <div>
+          <h3>Bases de datos</h3>
+          <ul><li>PostgreSQL</li><li>MongoDB</li><li>Redis</li><li>Neo4j</li></ul>
+        </div>
+        <div>
+          <h3>Herramientas</h3>
+          <ul><li>Git, GitHub y GitLab</li><li>Docker</li><li>pytest</li><li>APIs REST</li></ul>
+        </div>
+        <div>
+          <h3>Idiomas</h3>
+          <ul><li>Español nativo</li><li>Inglés intermedio-avanzado, conversacional</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="contacto">
+    <div class="wrap">
+      <h2>Si tenés una pasantía en datos o sistemas, hablemos.</h2>
+      <dl>
+        <dt>Email</dt><dd><a href="mailto:juansegobia2002@gmail.com">juansegobia2002@gmail.com</a></dd>
+        <dt>Teléfono</dt><dd><a href="tel:+542216070016">+54 221 607-0016</a></dd>
+        <dt>GitHub</dt><dd><a href="https://github.com/JuanSegobia">github.com/JuanSegobia</a></dd>
+        <!-- Cuando actualices LinkedIn, descomentá:
+        <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/juan-segobia-b400521b7/">linkedin.com/in/juan-segobia-b400521b7</a></dd>
+        -->
+        <dt>Ubicación</dt><dd>La Plata, Buenos Aires</dd>
+      </dl>
+      <a class="btn primary" href="mailto:juansegobia2002@gmail.com">Escribirme</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Juan Cruz Segobia Esteves · La Plata, 2026</div>
+</footer>
+
 </body>
 </html>
